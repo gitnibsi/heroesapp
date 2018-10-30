@@ -1,0 +1,63 @@
+<section id="hero-form" class="animated fadeIn fast">
+
+    <div class="container">
+
+        <h1>Heores</h1>
+        <hr>
+        <div class="row">
+            <div class="col-md-12 text-right">
+                <button [routerLink]="['/hero', 'new']" class="btn btn btn-outline-success" type="button" name="button">Add Hero</button>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+
+            <div class="col-md-12">
+
+                <div class="table-responsive">
+
+                    <table class="table table-hover">
+
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th scope="col" class="text-center">Firebase ID</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">House</th>
+                                <th scope="col">Bio</th>
+                                <th scope="col" class="text-center">Options</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr *ngFor="let heroKey of heroes | keys;">
+                                <td scope="row" class="text-center">{{ heroKey }}</td>
+                                <td>{{heroes[heroKey].name}}</td>
+                                <td>{{heroes[heroKey].house}}</td>
+                                <td>{{heroes[heroKey].bio}}</td>
+                                <td class="text-right">
+                                    <button [routerLink]="['/hero', heroKey]" type="button" class="btn btn-outline-success">Edit</button> &nbsp;&nbsp;
+                                    <button (click)="deleteHero(heroKey)" type="button" class="btn btn-outline-danger">Delete</button>
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                    <div *ngIf="(heroes | keys).length === 0 && !loading" class="alert alert-info" role="alert">
+                        <strong>No more Heroes</strong>
+                    </div>
+
+                    <div *ngIf="loading" class="alert alert-warning" role="alert">
+                        <strong>Loading, please wait...</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</section>
